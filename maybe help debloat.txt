@@ -1,0 +1,10 @@
+get the package name
+
+Get-AppxPackage *edge* 
+
+convert the name from 
+Windows.ContactSupport
+to 
+Microsoft-Windows-ContactSupport
+
+install_wim_tweak /o /c Microsoft-Windows-ContactSupport /r
