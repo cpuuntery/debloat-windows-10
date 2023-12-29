@@ -1,0 +1,41 @@
+Application Information
+Background Tasks Infrastructure Service
+Base Filtering Engine
+CoreMessaging
+Cryptographic Services
+DCOM Server Process Launcher
+DHCP Client
+DNS Client
+Device Install Service
+Device Setup Manager
+Distributed Link Tracking Client
+Group Policy Client
+IP Helper
+Local Session Manager
+Network List Service
+Network Location Awareness
+Network Store Interface Service
+Plug and Play
+PolicyAgent
+Power
+RPC Endpoint Mapper
+Remote Procedure Call (RPC)
+Security Accounts Manager
+Shell Hardware Detection
+State Repository Service
+SysMain
+System Event Notification Service
+System Events Broker
+TCP/IP NetBIOS Helper
+Task Scheduler
+Themes
+Time Broker
+User Manager
+User Profile Service
+Web Account Manager
+Windows Audio
+Windows Audio Endpoint Builder
+Windows Connection Manager
+Windows Defender Firewall
+Windows Event Log
+WLAN AutoConfig
