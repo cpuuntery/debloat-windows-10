@@ -1,0 +1,6 @@
+shell32.dll.mui  to C:\Windows\System32\en-US and maybe C:\Windows\SysWOW64\en-US\
+
+Microsoft.PowerShell.ConsoleHost.dll to C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\Microsoft.PowerShell.ConsoleHost
+search for  Microsoft.PowerShell.ConsoleHost.ni.dll inside C:\Windows\assembly\NativeImages_v4.0 and replace the file
+
+SnippingTool.exe to C:\Windows\System32\
