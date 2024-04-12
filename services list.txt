@@ -1,0 +1,28 @@
+list disabled services
+Get-Service | Where-Object {$_.StartType -EQ "Disabled"} | Select -Property "Name"
+Get-Service | Where-Object {$_.StartType -EQ "Disabled"}
+Get-WmiObject -Class Win32_Service | Where-Object {$_.StartMode -eq "Disabled"} | Format-Table Name
+Get-WmiObject -Class Win32_Service | Where-Object {$_.StartMode -eq "Disabled"} | Format-Table Name, DisplayName, StartMode -AutoSize
+
+
+
+
+list Manual startup services and are currently running
+Get-Service | Where-Object { $_.StartType -eq "Manual" -and $_.Status -eq 'Running' } | Format-Table Name
+Get-Service | Where-Object { $_.StartType -eq "Manual" -and $_.Status -eq 'Running' } | Format-Table -Property Name, DisplayName, Status, StartType -AutoSize
+
+
+
+
+list Manual startup services
+Get-Service | Where-Object {$_.StartType -eq "Manual"} | Format-Table Name
+Get-Service | Where-Object {$_.StartType -eq "Manual"} | Select-Object Name
+Get-Service | Where-Object {$_.StartType -eq "Manual"}
+Get-WmiObject -Class Win32_Service | Where-Object { $_.StartMode -eq "Manual" } | Format-Table Name, DisplayName, State, StartMode -AutoSize
+
+
+list running services
+Get-Service | Where-Object {$_.Status -EQ "Running"}
+Get-Service | Where-Object {$_.Status -EQ "Running"} | Format-Table Name
+
+

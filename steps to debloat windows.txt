@@ -1,0 +1,46 @@
+1- install net framework 3.5
+# E:\ this path of mounted windows iso file
+Add-WindowsCapability -Online -Name NetFx3~~~~ -Source E:\Sources\SxS
+2- remove quick assist
+Remove-WindowsCapability -Online -Name $(Get-WindowsCapability -Online -Name *quickassist*).Name
+2.2 turn off useless windows "Features"
+
+2.5 - Disable mitigation and useless security
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v FeatureSettingsOverride /t REG_DWORD /d 3 /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v FeatureSettingsOverrideMask /t REG_DWORD /d 3 /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\DeviceGuard" /v "EnableVirtualizationBasedSecurity" /t REG_DWORD /d 0 /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\DeviceGuard" /v "RequirePlatformSecurityFeatures" /t REG_DWORD /d 0 /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity" /v "Enabled" /t REG_DWORD /d 0 /f
+3- disable defender 
+4- pause updates from the settings disable windows update service
+5- connect to the internet
+irm https://massgrave.dev/get | iex
+6- use Winaero Tweaker and disable maintenance and ads remove items from context context menu
+7- copy files from "copy using win pe" to the correct paths
+8- Fix file explorer search using ClassicSearch from github. Before you use the tool, you will need to install "VC_redist.x64.exe"
+9- restore Classic System Properties using classic-system-properties-context-menu.zip
+10- Change system locale and change date and time format
+11- change page file settings
+12- change windows visual effects 
+13- disable hibernation 
+powercfg -h off
+14- Unexpected bug you can not remove print from the Context Menu even if you change the registry unless you install a program that can open images 
+15- Settings -> Personalization -> Colors -> Title bars and window borders
+16- Settings -> Personalization -> Taskbar -> Select which icons appear on the taskbar.
+
+Just make a backup using Acronis before doing step 17. One time I killed windows search. Maybe do not delete any speech related files or folders inside system32
+17- There are some junk left in windows after the Ameliorated  like
+remnants of windows defender search for "defender"
+windows speech engine to read things in windows in a robotic voice search for "speech"
+windows hello bio face unlock search for "face"
+the best way to find and delete the files is to use wiztree inside "windows pe"
+18-You need to just show the search icon in the taskbar. If you do not then when you open search you will have a black background
+
+19- use these files
+Add_Maximum_processor_frequency_to_Power_Options.reg
+Add_Maximum_processor_state_to_Power_Options.reg
+Add_Processor_performance_increase_threshold_to_Power_Options.reg
+Add_System_cooling_policy_to_Power_Options.reg
+System_Managed,_Last_Access_Updates_Disabled.reg
+Turn_OFF_Core_isolation_Memory_integrity.reg
+Enable_or_Disable_Last_Access_Time_Stamp_Updates.bat

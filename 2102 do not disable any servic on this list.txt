@@ -1,0 +1,52 @@
+Running  Appinfo            Application Information
+Running  AudioEndpointBu... Windows Audio Endpoint Builder
+Running  Audiosrv           Windows Audio
+Running  BFE                Base Filtering Engine
+Running  BrokerInfrastru... Background Tasks Infrastructure Ser...
+Running  camsvc             Capability Access Manager Service
+Running  CDPUserSvc_2c968   Connected Devices Platform User Ser...
+Running  COMSysApp          COM+ System Application
+Running  CoreMessagingRe... CoreMessaging
+Running  CryptSvc           Cryptographic Services
+Running  DcomLaunch         DCOM Server Process Launcher
+Running  Dhcp               DHCP Client
+Running  Dnscache           DNS Client
+Running  EventLog           Windows Event Log
+Running  EventSystem        COM+ Event System
+Running  FontCache          Windows Font Cache Service
+Running  gpsvc              Group Policy Client
+Running  iphlpsvc           IP Helper
+Running  KeyIso             CNG Key Isolation
+Running  LanmanServer       Server
+Running  LSM                Local Session Manager
+Running  mpssvc             Windows Defender Firewall
+Running  MSDTC              Distributed Transaction Coordinator
+Running  netprofm           Network List Service
+Running  NlaSvc             Network Location Awareness
+Running  nsi                Network Store Interface Service
+Running  PlugPlay           Plug and Play
+Running  Power              Power
+Running  ProfSvc            User Profile Service
+Running  RmSvc              Radio Management Service
+Running  RpcEptMapper       RPC Endpoint Mapper
+Running  RpcSs              Remote Procedure Call (RPC)
+Running  SamSs              Security Accounts Manager
+Running  Schedule           Task Scheduler
+Running  SENS               System Event Notification Service
+Running  SgrmBroker         System Guard Runtime Monitor Broker
+Running  ShellHWDetection   Shell Hardware Detection
+Running  StateRepository    State Repository Service
+Running  SysMain            SysMain
+Running  SystemEventsBroker System Events Broker
+Running  Themes             Themes
+Running  TimeBrokerSvc      Time Broker
+Running  TokenBroker        Web Account Manager
+Running  UserManager        User Manager
+Running  VGAuthService      VMware Alias Manager and Ticket Ser...
+Running  VMTools            VMware Tools
+Running  VMware Physical... VMware Physical Disk Helper Service
+Running  Wcmsvc             Windows Connection Manager
+Running  WinHttpAutoProx... WinHTTP Web Proxy Auto-Discovery Se...
+Running  Winmgmt            Windows Management Instrumentation
+Running  WpnService         Windows Push Notifications System S...
+Running  WpnUserService_... Windows Push Notifications User Ser...

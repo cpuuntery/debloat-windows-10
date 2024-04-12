@@ -1,0 +1,50 @@
+Running  Appinfo            Application Information
+Running  AudioEndpointBu... Windows Audio Endpoint Builder
+Running  Audiosrv           Windows Audio
+Running  AVP21.16           Kaspersky Service 21.16
+Running  BFE                Base Filtering Engine
+Running  BrokerInfrastru... Background Tasks Infrastructure Ser...
+Running  CoreMessagingRe... CoreMessaging
+Running  CryptSvc           Cryptographic Services
+Running  DcomLaunch         DCOM Server Process Launcher
+Running  DeviceAssociati... Device Association Service
+Running  Dhcp               DHCP Client
+Running  Dnscache           DNS Client
+Running  EventLog           Windows Event Log
+Running  EventSystem        COM+ Event System
+Running  Everything         Everything
+Running  FontCache          Windows Font Cache Service
+Running  hidserv            Human Interface Device Service
+Running  iphlpsvc           IP Helper
+Running  KeyIso             CNG Key Isolation
+Running  LSM                Local Session Manager
+Running  MpsSvc             Windows Defender Firewall
+Running  netprofm           Network List Service
+Running  NlaSvc             Network Location Awareness
+Running  nsi                Network Store Interface Service
+Running  NVDisplay.Conta... NVIDIA Display Container LS
+Running  PlugPlay           Plug and Play
+Running  Power              Power
+Running  ProfSvc            User Profile Service
+Running  RmSvc              Radio Management Service
+Running  RpcEptMapper       RPC Endpoint Mapper
+Running  RpcSs              Remote Procedure Call (RPC)
+Running  SamSs              Security Accounts Manager
+Running  Schedule           Task Scheduler
+Running  SENS               System Event Notification Service
+Running  ShellHWDetection   Shell Hardware Detection
+Running  StateRepository    State Repository Service
+Running  SysMain            Superfetch
+Running  SystemEventsBroker System Events Broker
+Running  Themes             Themes
+Running  TimeBrokerSvc      Time Broker
+Running  TokenBroker        Web Account Manager
+Running  UserManager        User Manager
+Running  VMAuthdService     VMware Authorization Service
+Running  VMUSBArbService    VMware USB Arbitration Service
+Running  Wcmsvc             Windows Connection Manager
+Running  WinHttpAutoProx... WinHTTP Web Proxy Auto-Discovery Se...
+Running  Winmgmt            Windows Management Instrumentation
+Running  WlanSvc            WLAN AutoConfig
+Running  WpnService         Windows Push Notifications System S...
+Running  WpnUserService_... Windows Push Notifications User Ser...
