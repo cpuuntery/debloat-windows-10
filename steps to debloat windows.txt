@@ -3,7 +3,10 @@
 Add-WindowsCapability -Online -Name NetFx3~~~~ -Source E:\Sources\SxS
 2- remove quick assist
 Remove-WindowsCapability -Online -Name $(Get-WindowsCapability -Online -Name *quickassist*).Name
-2.2 turn off useless windows "Features"
+2.2- turn off useless windows "Features"
+
+2.3- Disable Reserved Storage
+WindowsReservedStorageState -State Disabled
 
 2.5 - Disable mitigation and useless security
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v FeatureSettingsOverride /t REG_DWORD /d 3 /f
