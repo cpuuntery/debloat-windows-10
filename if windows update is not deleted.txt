@@ -1,0 +1,33 @@
+rem Stop and delete Windows Update Medic Service (it re-enables Windows Update)
+net stop WaasMedicSvc
+takeown /f %SYSTEMROOT%\System32\WaaSMedicSvc.dll
+cacls %SYSTEMROOT%\System32\WaaSMedicSvc.dll /e /p "Administrator":f
+del %SYSTEMROOT%\System32\WaaSMedicSvc.dll
+
+rem Stop and disable Update Orchestrator Service
+net stop UsoSvc
+takeown /f %SYSTEMROOT%\System32\usosvc.dll
+cacls %SYSTEMROOT%\System32\usosvc.dll /e /p "Administrator":f
+ren %SYSTEMROOT%\System32\usosvc.dll usosvc.dll.disabled
+
+rem Stop and disable Windows Update Service
+net stop wuauserv
+takeown /f %SYSTEMROOT%\System32\wuaueng.dll
+cacls %SYSTEMROOT%\System32\wuaueng.dll /e /p "Administrator":f
+ren %SYSTEMROOT%\System32\wuaueng.dll wuaueng.dll.disabled
+
+rem Remove scheduled tasks
+PowerShell "(New-Object System.Net.WebClient).DownloadFile('https://www.poweradmin.com/paexec/paexec.exe','%TEMP%\paexec.exe');
+for /f "delims=" %f in ('dir /b %WINDIR%\System32\Tasks\Microsoft\Windows\WaaSMedic') do %TEMP%\paexec -i -s schtasks /delete /f /tn "Microsoft\Windows\WaaSMedic\%f"
+rmdir %WINDIR%\System32\Tasks\Microsoft\Windows\WaaSMedic
+copy NUL %WINDIR%\System32\Tasks\Microsoft\Windows\WaaSMedic
+
+for /f "delims=" %f in ('dir /b %WINDIR%\System32\Tasks\Microsoft\Windows\UpdateOrchestrator') do %TEMP%\paexec -i -s schtasks /delete /f /tn "Microsoft\Windows\UpdateOrchestrator\%f"
+rmdir %WINDIR%\System32\Tasks\Microsoft\Windows\UpdateOrchestrator
+copy NUL %WINDIR%\System32\Tasks\Microsoft\Windows\UpdateOrchestrator
+
+for /f "delims=" %f in ('dir /b %WINDIR%\System32\Tasks\Microsoft\Windows\WindowsUpdate') do %TEMP%\paexec -i -s schtasks /delete /f /tn "Microsoft\Windows\WindowsUpdate\%f"
+rmdir %WINDIR%\System32\Tasks\Microsoft\Windows\WindowsUpdate
+copy NUL %WINDIR%\System32\Tasks\Microsoft\Windows\WindowsUpdate
+
+del %TEMP%\paexec.exe
