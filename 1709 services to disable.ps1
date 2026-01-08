@@ -36,6 +36,7 @@ Set-ItemProperty -Path ($regpath+"\WdiServiceHost") -Name Start -Value 4
 Set-ItemProperty -Path ($regpath+"\WPDBusEnum") -Name Start -Value 4
 Set-ItemProperty -Path ($regpath+"\wscsvc") -Name Start -Value 4
 Set-ItemProperty -Path ($regpath+"\WSearch") -Name Start -Value 4
+Set-ItemProperty -Path ($regpath+"\Server") -Name Start -Value 4
 
 
 Set-Service -Name AppReadiness -StartupType Disabled
@@ -74,4 +75,6 @@ Set-Service -Name WbioSrvc -StartupType Disabled
 Set-Service -Name WdiServiceHost -StartupType Disabled
 Set-Service -Name WPDBusEnum -StartupType Disabled
 Set-Service -Name wscsvc -StartupType Disabled
+Set-Service -Name Server -StartupType Disabled
+
 Set-Service -Name WSearch -StartupType Disabled
