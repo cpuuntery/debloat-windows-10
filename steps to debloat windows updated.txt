@@ -1,0 +1,160 @@
+1- install net framework 3.5
+# E:\ this path of mounted windows iso file
+Add-WindowsCapability -Online -Name NetFx3~~~~ -Source E:\Sources\SxS
+
+
+1.5- Disable Reserved Storage
+Set-WindowsReservedStorageState -State Disabled
+DISM.exe /Online /Set-ReservedStorageState /State:Disabled
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\ReserveManager" -Name "ShippedWithReserves" -Value 0
+reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\ReserveManager" /v ShippedWithReserves /t REG_DWORD /d 0 /f
+import Disable_Reserved_Storage.reg to the Registry
+
+1.6- delete C:\Windows\HelpPane.exe
+
+1.8- prevent drive checking on a Windows boot?
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager" /v "BootExecute" /t REG_MULTI_SZ /d "autocheck autochk /k:C *" /f
+
+2- remove quick assist only win10
+Remove-WindowsCapability -Online -Name $(Get-WindowsCapability -Online -Name *quickassist*).Name
+
+
+2.1 turn off useless windows "Features"
+
+2.2 - Disable mitigation and useless security
+
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v FeatureSettingsOverride /t REG_DWORD /d 3 /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v FeatureSettingsOverrideMask /t REG_DWORD /d 3 /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\DeviceGuard" /v "EnableVirtualizationBasedSecurity" /t REG_DWORD /d 0 /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\DeviceGuard" /v "RequirePlatformSecurityFeatures" /t REG_DWORD /d 0 /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity" /v "Enabled" /t REG_DWORD /d 0 /f
+
+
+
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\DeviceGuard" /v RequireMicrosoftSignedBootChain /t REG_DWORD /d 0 /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\LSA" /v LsaCfgFlags /t REG_DWORD /d 0 /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\LSA" /v RunAsPPL /t REG_DWORD /d 0 /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\LSA" /v RunAsPPLBoot /t REG_DWORD /d 0 /f
+
+
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\CI\Config" -Name "VulnerableDriverBlocklistEnable" -Value 0
+gpupdate /force
+
+bcdedit /set hypervisorlaunchtype off
+dism /online /disable-feature /featurename:Microsoft-hyper-v-all /norestart
+dism /online /disable-feature /featurename:WindowsHypervisorPlatform /norestart
+dism /online /disable-feature /featurename:VirtualMachinePlatform /norestart
+
+
+
+
+
+
+3- disable defender 
+
+rut in powershell or powershell_ise.exe
+
+echo 'X5O!P%@AP[4\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*' >> "$env:TEMP\bcrypt.dll";
+& "C:\Program Files\Windows Defender\MpCmdRun.exe" -Restore -Name "Virus:DOS/EICAR_Test_File" -Path "C:\Program Files\Windows Defender";
+rm $env:TEMP\bcrypt.dll;
+
+
+echo 'X5O!P%@AP[4\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*' >> "$env:TEMP\bcrypt.dll";
+Start-Sleep -Seconds 3;
+& "C:\Program Files\Windows Defender\MpCmdRun.exe" -Restore -Name "Virus:DOS/EICAR_Test_File" -Path "C:\Program Files\Windows Defender";
+rm $env:TEMP\bcrypt.dll;
+
+or you can extraxt and run defender_remover.zip
+
+
+if you did not use defender_remover.zip then import dis_all_sec.reg to the Registry
+sudo reg import "C:\Users\ltsc\Desktop\dis_all_sec.reg"
+
+
+
+4- pause updates from the settings disable windows update service
+
+
+4.4- kill the three anooying services
+
+$registryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\BITS"
+Set-ItemProperty -Path  $RegistryPath -Name ImagePath -Value null
+$key = Get-Item -Path $registryPath
+$users = @("TrustedInstaller", "ALL APPLICATION PACKAGES", "CREATOR OWNER", "SYSTEM", "Administrators", "Users")
+foreach ($user in $users) {
+    $acl = Get-Acl -Path $registryPath
+    $rule = New-Object System.Security.AccessControl.RegistryAccessRule($user, "FullControl", "Deny")
+    $acl.AddAccessRule($rule)
+    Set-Acl -Path $registryPath -AclObject $acl
+}
+
+
+
+$registryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\DiagTrack"
+Set-ItemProperty -Path  $RegistryPath -Name ImagePath -Value null
+$key = Get-Item -Path $registryPath
+$users = @("TrustedInstaller", "ALL APPLICATION PACKAGES", "CREATOR OWNER", "SYSTEM", "Administrators", "Users")
+foreach ($user in $users) {
+    $acl = Get-Acl -Path $registryPath
+    $rule = New-Object System.Security.AccessControl.RegistryAccessRule($user, "FullControl", "Deny")
+    $acl.AddAccessRule($rule)
+    Set-Acl -Path $registryPath -AclObject $acl
+}
+
+$registryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\DoSvc"
+Set-ItemProperty -Path  $RegistryPath -Name ImagePath -Value null
+$key = Get-Item -Path $registryPath
+$users = @("TrustedInstaller", "ALL APPLICATION PACKAGES", "CREATOR OWNER", "SYSTEM", "Administrators", "Users")
+foreach ($user in $users) {
+    $acl = Get-Acl -Path $registryPath
+    $rule = New-Object System.Security.AccessControl.RegistryAccessRule($user, "FullControl", "Deny")
+    $acl.AddAccessRule($rule)
+    Set-Acl -Path $registryPath -AclObject $acl
+}
+
+Restart-Computer -force
+
+
+5- connect to the internet
+irm https://massgrave.dev/get | iex
+6- use Winaero Tweaker and disable maintenance and ads remove items from context context menu
+
+remove pin to start from context menue
+remove pin to quick acess from context menue
+remove pin to library from context menue
+remove give acess to from context menue 
+remove share from context menue 
+remove restore pervous version from the context menue 
+remove create a shortcut from the context menue 
+remove add to favourites from the context menue 
+
+6.6- run windows ame
+
+7- copy files from "copy using win pe" to the correct paths
+8- Fix file explorer search using ClassicSearch from github. Before you use the tool, you will need to install "VC_redist.x64.exe"
+9- restore Classic System Properties using classic-system-properties-context-menu.zip
+10- Change system locale and change date and time format
+11- change page file settings
+12- change windows visual effects 
+13- disable hibernation 
+powercfg -h off
+14- Unexpected bug you can not remove print from the Context Menu even if you change the registry unless you install a program that can open images 
+15- Settings -> Personalization -> Colors -> Title bars and window borders
+16- Settings -> Personalization -> Taskbar -> Select which icons appear on the taskbar.
+
+Just make a backup using Acronis before doing step 17. One time I killed windows search. Maybe do not delete any speech related files or folders inside system32
+17- There are some junk left in windows after the Ameliorated  like
+remnants of windows defender search for "defender"
+windows speech engine to read things in windows in a robotic voice search for "speech"
+windows hello bio face unlock search for "face"
+the best way to find and delete the files is to use wiztree inside "windows pe"
+18-You need to just show the search icon in the taskbar. If you do not then when you open search you will have a black background
+
+19- use these files
+Add_Maximum_processor_frequency_to_Power_Options.reg
+Add_Maximum_processor_state_to_Power_Options.reg
+Add_Processor_performance_increase_threshold_to_Power_Options.reg
+Add_System_cooling_policy_to_Power_Options.reg
+System_Managed,_Last_Access_Updates_Disabled.reg
+Turn_OFF_Core_isolation_Memory_integrity.reg
+Enable_or_Disable_Last_Access_Time_Stamp_Updates.bat
