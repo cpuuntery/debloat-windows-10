@@ -35,6 +35,8 @@ Set-ItemProperty -Path ($regpath+"\WSearch") -Name Start -Value 4
 Set-ItemProperty -Path ($regpath+"\OneSyncSvc") -Name Start -Value 4
 Set-ItemProperty -Path ($regpath+"\cbdhsvc") -Name Start -Value 4
 Set-ItemProperty -Path ($regpath+"\CDPUserSvc") -Name Start -Value 4
+Set-ItemProperty -Path ($regpath+"\Server") -Name Start -Value 4
+
 
 
 Set-Service -Name AppReadiness -StartupType Disabled
@@ -70,6 +72,8 @@ Set-Service -Name TrkWks -StartupType Disabled
 Set-Service -Name tzautoupdate -StartupType Disabled
 Set-Service -Name VSS -StartupType Disabled
 Set-Service -Name WSearch -StartupType Disabled
+Set-Service -Name Server -StartupType Disabled
+
 
 
 $registryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\BITS"
@@ -82,4 +86,29 @@ foreach ($user in $users) {
     $acl.AddAccessRule($rule)
     Set-Acl -Path $registryPath -AclObject $acl
 }
+
+
+
+$registryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\DiagTrack"
+Set-ItemProperty -Path  $RegistryPath -Name ImagePath -Value null
+$key = Get-Item -Path $registryPath
+$users = @("TrustedInstaller", "ALL APPLICATION PACKAGES", "CREATOR OWNER", "SYSTEM", "Administrators", "Users")
+foreach ($user in $users) {
+    $acl = Get-Acl -Path $registryPath
+    $rule = New-Object System.Security.AccessControl.RegistryAccessRule($user, "FullControl", "Deny")
+    $acl.AddAccessRule($rule)
+    Set-Acl -Path $registryPath -AclObject $acl
+}
+
+$registryPath = "HKLM:\SYSTEM\CurrentControlSet\Services\DoSvc"
+Set-ItemProperty -Path  $RegistryPath -Name ImagePath -Value null
+$key = Get-Item -Path $registryPath
+$users = @("TrustedInstaller", "ALL APPLICATION PACKAGES", "CREATOR OWNER", "SYSTEM", "Administrators", "Users")
+foreach ($user in $users) {
+    $acl = Get-Acl -Path $registryPath
+    $rule = New-Object System.Security.AccessControl.RegistryAccessRule($user, "FullControl", "Deny")
+    $acl.AddAccessRule($rule)
+    Set-Acl -Path $registryPath -AclObject $acl
+}
+
 
